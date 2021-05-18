@@ -37,7 +37,7 @@ class App extends React.Component {
     axios({
       withCredentials: true,
       method: 'post',
-      url: 'http://localhost:5000/auth/signup',
+      url: 'https://may-back.herokuapp.com/auth/signup',
       data: {
         username: this.state.inputNewUser.username,
         password: this.state.inputNewUser.password,
@@ -56,7 +56,7 @@ class App extends React.Component {
     axios({
       withCredentials: true,
       method: 'post',
-      url: 'http://localhost:5000/auth/login',
+      url: 'https://may-back.herokuapp.com/auth/login',
       data: {
         username: this.state.inputNewUser.username,
         password: this.state.inputNewUser.password,
