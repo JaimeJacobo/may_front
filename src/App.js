@@ -54,6 +54,23 @@ class App extends React.Component {
 
   submitLogIn(event) {
     event.preventDefault()
+    fetch('https://may-back.herokuapp.com/auth/login', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        username: this.state.inputNewUser.username,
+        password: this.state.inputNewUser.password,
+      })
+        .then(function (res) {
+          console.log(res)
+        })
+        .catch(function (res) {
+          console.log(res)
+        }),
+    })
     // axios({
     //   withCredentials: true,
     //   method: 'post',
@@ -69,28 +86,6 @@ class App extends React.Component {
     //   .catch((err) => {
     //     console.log(err)
     //   })
-
-    const login_axios = axios.create({
-      withCredentials: true,
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'x-www-form-urlencoded',
-      },
-      params: {
-        username: this.state.inputNewUser.username,
-        password: this.state.inputNewUser.password,
-      },
-    })
-    login_axios
-      .post('https://may-back.herokuapp.com/auth/login')
-      .then(function (response) {
-        console.log('RESPONSE')
-        console.log(response)
-      })
-      .catch(function (error) {
-        console.log('ERROR')
-        console.log(error)
-      })
   }
 
   render() {
