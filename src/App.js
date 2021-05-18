@@ -1,25 +1,122 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './App.css'
+import axios from 'axios'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+class App extends React.Component {
+  state = {
+    inputNewUser: {
+      username: '',
+      password: '',
+    },
+    user: {},
+  }
+
+  // componentDidMount() {
+  //   axios({
+  //     method: 'get',
+  //     url: 'http://localhost:5000/',
+  //   })
+  //     .then((result) => {
+  //       console.log(result)
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  // }
+
+  handleInput(event) {
+    const { name, value } = event.target
+    this.setState({
+      ...this.state,
+      inputNewUser: { ...this.state.inputNewUser, [name]: value },
+    })
+  }
+
+  submitSignUp(event) {
+    event.preventDefault()
+    axios({
+      withCredentials: true,
+      method: 'post',
+      url: 'http://localhost:5000/auth/signup',
+      data: {
+        username: this.state.inputNewUser.username,
+        password: this.state.inputNewUser.password,
+      },
+    })
+      .then((result) => {
+        console.log(result)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  submitLogIn(event) {
+    event.preventDefault()
+    axios({
+      withCredentials: true,
+      method: 'post',
+      url: 'http://localhost:5000/auth/login',
+      data: {
+        username: this.state.inputNewUser.username,
+        password: this.state.inputNewUser.password,
+      },
+    })
+      .then((result) => {
+        console.log(result)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <h1>Componente App</h1>
+        <h2>Create new user</h2>
+        <form
+          onSubmit={(event) => {
+            this.submitSignUp(event)
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            onChange={(event) => this.handleInput(event)}
+          />
+          <input
+            type="text"
+            name="password"
+            placeholder="Password"
+            onChange={(event) => this.handleInput(event)}
+          />
+          <button>Create User</button>
+        </form>
+        <h2>Log in</h2>
+        <form
+          onSubmit={(event) => {
+            this.submitLogIn(event)
+          }}
+        >
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            onChange={(event) => this.handleInput(event)}
+          />
+          <input
+            type="text"
+            name="password"
+            placeholder="Password"
+            onChange={(event) => this.handleInput(event)}
+          />
+          <button>Log in</button>
+        </form>
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
