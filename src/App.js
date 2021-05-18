@@ -36,6 +36,10 @@ class App extends React.Component {
     event.preventDefault()
     axios({
       withCredentials: true,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'x-www-form-urlencoded',
+      },
       method: 'post',
       url: 'https://may-back.herokuapp.com/auth/signup',
       data: {
