@@ -63,14 +63,14 @@ class App extends React.Component {
       body: JSON.stringify({
         username: this.state.inputNewUser.username,
         password: this.state.inputNewUser.password,
-      })
-        .then(function (res) {
-          console.log(res)
-        })
-        .catch(function (res) {
-          console.log(res)
-        }),
+      }),
     })
+      .then(function (res) {
+        console.log(res)
+      })
+      .catch(function (res) {
+        console.log(res)
+      })
     // axios({
     //   withCredentials: true,
     //   method: 'post',
